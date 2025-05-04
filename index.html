@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzeria Napoli - Bolnuevo, Murcia</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#D84315',secondary:'#2E7D32'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .font-great-vibes {
+            font-family: 'Great Vibes', cursive;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .bg-overlay {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-[#FAFAFA] text-[#212121]">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full bg-white bg-opacity-95 shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="font-['Pacifico'] text-primary text-2xl md:text-3xl">Pizzeria Napoli</a>
+            
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="menu-toggle" class="w-10 h-10 flex items-center justify-center text-primary">
+                    <i class="ri-menu-line ri-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#inicio" class="text-[#212121] hover:text-primary transition-colors">Inicio</a>
+                <a href="#nosotros" class="text-[#212121] hover:text-primary transition-colors">Nosotros</a>
+                <a href="#menu" class="text-[#212121] hover:text-primary transition-colors">Menú</a>
+                <a href="#galeria" class="text-[#212121] hover:text-primary transition-colors">Galería</a>
+                <a href="#contacto" class="text-[#212121] hover:text-primary transition-colors">Contacto</a>
+                
+                <!-- Language Selector -->
+                <div class="relative ml-4">
+                    <button id="language-toggle" class="flex items-center space-x-1 text-sm font-medium">
+                        <span id="current-lang">ES</span>
+                        <div class="w-4 h-4 flex items-center justify-center">
+                            <i class="ri-arrow-down-s-line"></i>
+                        </div>
+                    </button>
+                    <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-20 bg-white shadow-lg rounded py-1">
+                        <button data-lang="es" class="lang-option block w-full text-left px-4 py-2 text-sm hover:bg-gray-100">ES</button>
+                        <button data-lang="en" class="lang-option block w-full text-left px-4 py-2 text-sm hover:bg-gray-100">EN</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white w-full border-t">
+            <div class="container mx-auto px-4 py-3">
+                <nav class="flex flex-col space-y-3">
+                    <a href="#inicio" class="text-[#212121] hover:text-primary py-2 transition-colors">Inicio</a>
+                    <a href="#nosotros" class="text-[#212121] hover:text-primary py-2 transition-colors">Nosotros</a>
+                    <a href="#menu" class="text-[#212121] hover:text-primary py-2 transition-colors">Menú</a>
+                    <a href="#galeria" class="text-[#212121] hover:text-primary py-2 transition-colors">Galería</a>
+                    <a href="#contacto" class="text-[#212121] hover:text-primary py-2 transition-colors">Contacto</a>
+                    
+                    <!-- Mobile Language Selector -->
+                    <div class="flex items-center py-2">
+                        <span class="mr-3">Idioma:</span>
+                        <button data-lang="es" class="mobile-lang-option px-3 py-1 rounded-full bg-primary text-white mr-2 whitespace-nowrap !rounded-button">ES</button>
+                        <button data-lang="en" class="mobile-lang-option px-3 py-1 rounded-full bg-gray-200 text-gray-700 whitespace-nowrap !rounded-button">EN</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="pt-16 md:pt-20">
+        <div class="relative h-[80vh] overflow-hidden">
+            <div class="absolute inset-0" style="background-image: url('https://readdy.ai/api/search-image?query=Traditional%20Italian%20pizzeria%20with%20wood-fired%20oven%2C%20fresh%20ingredients%20like%20tomatoes%2C%20basil%2C%20and%20mozzarella%20cheese%2C%20rustic%20wooden%20tables%2C%20warm%20ambient%20lighting%2C%20Italian%20flags%2C%20and%20a%20cozy%20Mediterranean%20atmosphere%20with%20stone%20walls%20and%20Italian%20decorations&width=1920&height=1080&seq=1&orientation=landscape'); background-size: cover; background-position: center;"></div>
+            <div class="absolute inset-0 bg-overlay"></div>
+            <div class="relative h-full flex flex-col justify-center items-center text-center px-4 text-white">
+                <h1 class="font-great-vibes text-5xl md:text-7xl mb-4 text-shadow">Pizzeria Napoli</h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-2xl text-shadow">La auténtica pizza napolitana en el corazón de Bolnuevo</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="tel:+34641826049" class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-md shadow-lg transition-all whitespace-nowrap !rounded-button">Reservar Ahora</a>
+                    <a href="#menu" class="bg-white hover:bg-gray-100 text-primary px-6 py-3 rounded-md shadow-lg transition-all whitespace-nowrap !rounded-button">Ver Menú</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="nosotros" class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <h2 class="font-great-vibes text-4xl md:text-5xl text-center text-primary mb-12">Nuestra Historia</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-2xl font-semibold mb-4">Tradición Napolitana en Bolnuevo</h3>
+                    <p class="mb-4">Desde 2010, Pizzeria Napoli ha traído la auténtica cocina napolitana a las costas de Murcia. Nuestro maestro pizzero, Antonio, aprendió el arte de la pizza en las calles de Nápoles y ahora comparte su pasión con cada pizza que sale de nuestro horno de leña.</p>
+                    <p class="mb-4">Utilizamos solo ingredientes de la más alta calidad: tomates San Marzano, mozzarella fresca, aceite de oliva virgen extra y masa fermentada durante 48 horas para conseguir ese sabor y textura inconfundibles.</p>
+                    <p>Nuestro horno de leña, importado directamente de Italia, alcanza los 485°C, permitiéndonos cocinar la pizza perfecta en solo 90 segundos, conservando todos los sabores y aromas que caracterizan a la auténtica pizza napolitana.</p>
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-lg">
+                    <iframe width="100%" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video de Pizzeria Napoli" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="w-full"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-16 md:py-24 bg-[#F5F5F5]">
+        <div class="container mx-auto px-4">
+            <h2 class="font-great-vibes text-4xl md:text-5xl text-center text-primary mb-12">Nuestro Menú</h2>
+            
+            <!-- Menu Tabs -->
+            <div class="flex flex-wrap justify-center mb-8 gap-2">
+                <button class="menu-tab bg-white border border-gray-200 px-4 py-2 rounded-full text-sm font-medium hover:bg-primary hover:text-white transition-colors active whitespace-nowrap !rounded-button" data-tab="entrantes">Entrantes</button>
+                <button class="menu-tab bg-white border border-gray-200 px-4 py-2 rounded-full text-sm font-medium hover:bg-primary hover:text-white transition-colors whitespace-nowrap !rounded-button" data-tab="ensaladas">Ensaladas</button>
+                <button class="menu-tab bg-white border border-gray-200 px-4 py-2 rounded-full text-sm font-medium hover:bg-primary hover:text-white transition-colors whitespace-nowrap !rounded-button" data-tab="pizzas-clasicas">Pizzas Clásicas</button>
+                <button class="menu-tab bg-white border border-gray-200 px-4 py-2 rounded-full text-sm font-medium hover:bg-primary hover:text-white transition-colors whitespace-nowrap !rounded-button" data-tab="pizzas-especiales">Pizzas Especiales</button>
+                <button class="menu-tab bg-white border border-gray-200 px-4 py-2 rounded-full text-sm font-medium hover:bg-primary hover:text-white transition-colors whitespace-nowrap !rounded-button" data-tab="postres">Postres</button>
+            </div>
+            
+            <!-- Menu Content -->
+            <div class="tab-content active" id="entrantes">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Italian%20bruschetta%20with%20fresh%20tomatoes%2C%20basil%2C%20and%20olive%20oil%20on%20toasted%20bread%2C%20served%20on%20a%20rustic%20wooden%20board%20with%20a%20clean%20white%20background%2C%20high%20quality%20food%20photography%20with%20soft%20natural%20lighting&width=600&height=400&seq=2&orientation=landscape" alt="Bruschetta" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Bruschetta</h3>
+                                <span class="text-primary font-medium">6,50 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Pan tostado con tomate fresco, ajo, albahaca y aceite de oliva virgen extra.</p>
+                            <div class="flex gap-1">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Italian%20antipasto%20platter%20with%20prosciutto%2C%20salami%2C%20cheese%2C%20olives%2C%20and%20grilled%20vegetables%20arranged%20beautifully%20on%20a%20wooden%20serving%20board%2C%20high%20quality%20food%20photography%20with%20soft%20natural%20lighting&width=600&height=400&seq=3&orientation=landscape" alt="Antipasto Italiano" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Antipasto Italiano</h3>
+                                <span class="text-primary font-medium">12,90 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Selección de embutidos italianos, quesos, aceitunas y verduras a la parrilla.</p>
+                            <div class="flex gap-1 flex-wrap">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Sulfitos</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Italian%20arancini%20rice%20balls%20with%20crispy%20golden%20exterior%20and%20filled%20with%20saffron%20risotto%20and%20mozzarella%2C%20served%20on%20a%20white%20plate%20with%20marinara%20sauce%2C%20high%20quality%20food%20photography%20with%20soft%20natural%20lighting&width=600&height=400&seq=4&orientation=landscape" alt="Arancini" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Arancini</h3>
+                                <span class="text-primary font-medium">7,90 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Croquetas de arroz sicilianas rellenas de queso mozzarella y ragú de carne.</p>
+                            <div class="flex gap-1 flex-wrap">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Huevo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="ensaladas">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Fresh%20Caprese%20salad%20with%20sliced%20tomatoes%2C%20mozzarella%20cheese%2C%20and%20basil%20leaves%20drizzled%20with%20olive%20oil%20and%20balsamic%20glaze%2C%20arranged%20on%20a%20white%20plate%20with%20a%20clean%20background%2C%20high%20quality%20food%20photography&width=600&height=400&seq=5&orientation=landscape" alt="Ensalada Caprese" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Ensalada Caprese</h3>
+                                <span class="text-primary font-medium">8,50 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Tomate, mozzarella fresca, albahaca, aceite de oliva y reducción de vinagre balsámico.</p>
+                            <div class="flex gap-1">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Italian%20Caesar%20salad%20with%20romaine%20lettuce%2C%20parmesan%20cheese%2C%20croutons%2C%20and%20Caesar%20dressing%2C%20served%20on%20a%20white%20plate%20with%20a%20clean%20background%2C%20high%20quality%20food%20photography%20with%20soft%20natural%20lighting&width=600&height=400&seq=6&orientation=landscape" alt="Ensalada César" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Ensalada César</h3>
+                                <span class="text-primary font-medium">9,90 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Lechuga romana, pollo a la parrilla, crutones, queso parmesano y salsa César.</p>
+                            <div class="flex gap-1 flex-wrap">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Huevo</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Pescado</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Mediterranean%20salad%20with%20mixed%20greens%2C%20cherry%20tomatoes%2C%20cucumber%2C%20red%20onion%2C%20black%20olives%2C%20feta%20cheese%2C%20and%20Italian%20dressing%2C%20served%20on%20a%20white%20plate%20with%20a%20clean%20background%2C%20high%20quality%20food%20photography&width=600&height=400&seq=7&orientation=landscape" alt="Ensalada Mediterránea" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Ensalada Mediterránea</h3>
+                                <span class="text-primary font-medium">8,90 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Mezclum de lechugas, tomate cherry, pepino, cebolla roja, aceitunas negras y queso feta.</p>
+                            <div class="flex gap-1">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="pizzas-clasicas">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Traditional%20Neapolitan%20Margherita%20pizza%20with%20San%20Marzano%20tomato%20sauce%2C%20fresh%20mozzarella%2C%20basil%20leaves%2C%20and%20olive%20oil%2C%20with%20a%20puffy%20charred%20crust%20from%20a%20wood-fired%20oven%2C%20high%20quality%20food%20photography&width=600&height=400&seq=8&orientation=landscape" alt="Pizza Margherita" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Margherita</h3>
+                                <span class="text-primary font-medium">10,50 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Tomate San Marzano, mozzarella fior di latte, albahaca fresca y aceite de oliva.</p>
+                            <div class="flex gap-1 flex-wrap">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Neapolitan%20Marinara%20pizza%20with%20San%20Marzano%20tomato%20sauce%2C%20garlic%2C%20oregano%2C%20and%20olive%20oil%20with%20no%20cheese%2C%20showing%20a%20perfectly%20charred%20crust%20from%20a%20wood-fired%20oven%2C%20high%20quality%20food%20photography&width=600&height=400&seq=9&orientation=landscape" alt="Pizza Marinara" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Marinara</h3>
+                                <span class="text-primary font-medium">8,90 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Tomate San Marzano, ajo, orégano y aceite de oliva. La pizza tradicional de los marineros napolitanos.</p>
+                            <div class="flex gap-1">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Neapolitan%20pizza%20with%20San%20Marzano%20tomato%20sauce%2C%20fresh%20mozzarella%2C%20prosciutto%2C%20arugula%2C%20and%20shaved%20parmesan%20cheese%2C%20with%20a%20puffy%20charred%20crust%20from%20a%20wood-fired%20oven%2C%20high%20quality%20food%20photography&width=600&height=400&seq=10&orientation=landscape" alt="Pizza Prosciutto" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Prosciutto e Rucola</h3>
+                                <span class="text-primary font-medium">13,90 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Tomate, mozzarella, jamón de Parma, rúcula fresca y lascas de parmesano.</p>
+                            <div class="flex gap-1 flex-wrap">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="pizzas-especiales">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Gourmet%20pizza%20with%20San%20Marzano%20tomato%20sauce%2C%20buffalo%20mozzarella%2C%20spicy%20salami%2C%20fresh%20basil%2C%20and%20chili%20oil%2C%20with%20a%20puffy%20charred%20crust%20from%20a%20wood-fired%20oven%2C%20high%20quality%20food%20photography&width=600&height=400&seq=11&orientation=landscape" alt="Pizza Diavola" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Diavola</h3>
+                                <span class="text-primary font-medium">12,90 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Tomate, mozzarella, salami picante, aceite de guindilla y orégano. Para los amantes del picante.</p>
+                            <div class="flex gap-1 flex-wrap">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Gourmet%20pizza%20with%20creamy%20white%20sauce%2C%20mozzarella%2C%20gorgonzola%2C%20fontina%2C%20and%20parmesan%20cheeses%2C%20with%20a%20puffy%20charred%20crust%20from%20a%20wood-fired%20oven%2C%20high%20quality%20food%20photography&width=600&height=400&seq=12&orientation=landscape" alt="Pizza Quattro Formaggi" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Quattro Formaggi</h3>
+                                <span class="text-primary font-medium">13,50 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Base blanca con mozzarella, gorgonzola, fontina y parmesano. El paraíso de los amantes del queso.</p>
+                            <div class="flex gap-1 flex-wrap">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Gourmet%20pizza%20with%20San%20Marzano%20tomato%20sauce%2C%20mozzarella%2C%20mushrooms%2C%20artichokes%2C%20black%20olives%2C%20and%20ham%2C%20with%20a%20puffy%20charred%20crust%20from%20a%20wood-fired%20oven%2C%20high%20quality%20food%20photography&width=600&height=400&seq=13&orientation=landscape" alt="Pizza Capricciosa" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Capricciosa</h3>
+                                <span class="text-primary font-medium">13,90 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Tomate, mozzarella, champiñones, alcachofas, aceitunas negras y jamón cocido.</p>
+                            <div class="flex gap-1 flex-wrap">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Sulfitos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="postres">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Classic%20Italian%20tiramisu%20with%20layers%20of%20coffee-soaked%20ladyfingers%20and%20mascarpone%20cream%2C%20dusted%20with%20cocoa%20powder%2C%20served%20in%20a%20glass%20dish%2C%20high%20quality%20food%20photography&width=600&height=400&seq=14&orientation=landscape" alt="Tiramisú" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Tiramisú</h3>
+                                <span class="text-primary font-medium">6,50 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">El clásico postre italiano con bizcochos empapados en café, crema de mascarpone y cacao.</p>
+                            <div class="flex gap-1 flex-wrap">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Huevo</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Italian%20panna%20cotta%20dessert%20with%20vanilla%20bean%20specks%2C%20topped%20with%20fresh%20berry%20coulis%2C%20served%20in%20a%20glass%20dish%2C%20high%20quality%20food%20photography%20with%20soft%20natural%20lighting&width=600&height=400&seq=15&orientation=landscape" alt="Panna Cotta" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Panna Cotta</h3>
+                                <span class="text-primary font-medium">5,90 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Suave postre de nata cuajada con vainilla y coulis de frutos rojos.</p>
+                            <div class="flex gap-1">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://readdy.ai/api/search-image?query=Italian%20cannoli%20with%20crispy%20pastry%20shells%20filled%20with%20sweet%20ricotta%20cream%2C%20chocolate%20chips%2C%20and%20pistachios%2C%20dusted%20with%20powdered%20sugar%2C%20served%20on%20a%20white%20plate%2C%20high%20quality%20food%20photography&width=600&height=400&seq=16&orientation=landscape" alt="Cannoli" class="w-full h-full object-cover object-top">
+                        </div>
+                        <div class="p-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-lg font-semibold">Cannoli Siciliani</h3>
+                                <span class="text-primary font-medium">6,90 €</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Crujientes tubos de masa rellenos de crema de ricotta, chips de chocolate y pistachos.</p>
+                            <div class="flex gap-1 flex-wrap">
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Gluten</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Lácteos</span>
+                                <span class="bg-gray-100 text-xs px-2 py-1 rounded-full">Frutos secos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galeria" class="py-16 md:py-24">
+        <div class="container mx-auto px-4">
+            <h2 class="font-great-vibes text-4xl md:text-5xl text-center text-primary mb-12">Nuestra Galería</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md">
+                    <img src="https://readdy.ai/api/search-image?query=Interior%20of%20a%20traditional%20Italian%20pizzeria%20with%20wood-fired%20oven%2C%20rustic%20decor%2C%20warm%20lighting%2C%20and%20cozy%20atmosphere%2C%20high%20quality%20photography&width=600&height=600&seq=17&orientation=squarish" alt="Interior del restaurante" class="w-full h-64 object-cover object-top transition-transform duration-300">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md">
+                    <img src="https://readdy.ai/api/search-image?query=Traditional%20wood-fired%20pizza%20oven%20with%20flames%20and%20pizza%20being%20cooked%20inside%2C%20in%20an%20authentic%20Italian%20pizzeria%2C%20high%20quality%20photography&width=600&height=600&seq=18&orientation=squarish" alt="Horno de leña" class="w-full h-64 object-cover object-top transition-transform duration-300">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md">
+                    <img src="https://readdy.ai/api/search-image?query=Chef%20preparing%20pizza%20dough%20by%20hand%20in%20an%20Italian%20pizzeria%20kitchen%2C%20stretching%20and%20tossing%20the%20dough%2C%20high%20quality%20photography&width=600&height=600&seq=19&orientation=squarish" alt="Preparación de masa" class="w-full h-64 object-cover object-top transition-transform duration-300">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md">
+                    <img src="https://readdy.ai/api/search-image?query=Fresh%20ingredients%20for%20Italian%20pizza%20including%20San%20Marzano%20tomatoes%2C%20buffalo%20mozzarella%2C%20basil%2C%20olive%20oil%2C%20and%20flour%2C%20arranged%20beautifully%2C%20high%20quality%20photography&width=600&height=600&seq=20&orientation=squarish" alt="Ingredientes frescos" class="w-full h-64 object-cover object-top transition-transform duration-300">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md">
+                    <img src="https://readdy.ai/api/search-image?query=Perfectly%20cooked%20Neapolitan%20pizza%20with%20puffy%20charred%20crust%20being%20removed%20from%20a%20wood-fired%20oven%20with%20a%20pizza%20peel%2C%20high%20quality%20photography&width=600&height=600&seq=21&orientation=squarish" alt="Pizza saliendo del horno" class="w-full h-64 object-cover object-top transition-transform duration-300">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md">
+                    <img src="https://readdy.ai/api/search-image?query=Happy%20customers%20enjoying%20pizza%20and%20wine%20at%20a%20cozy%20Italian%20pizzeria%20with%20warm%20ambient%20lighting%2C%20high%20quality%20photography&width=600&height=600&seq=22&orientation=squarish" alt="Clientes disfrutando" class="w-full h-64 object-cover object-top transition-transform duration-300">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md">
+                    <img src="https://readdy.ai/api/search-image?query=Outdoor%20terrace%20of%20an%20Italian%20pizzeria%20with%20Mediterranean%20decor%2C%20string%20lights%2C%20and%20customers%20dining%20al%20fresco%2C%20high%20quality%20photography&width=600&height=600&seq=23&orientation=squarish" alt="Terraza exterior" class="w-full h-64 object-cover object-top transition-transform duration-300">
+                </div>
+                <div class="gallery-item rounded-lg overflow-hidden shadow-md">
+                    <img src="https://readdy.ai/api/search-image?query=Assortment%20of%20traditional%20Italian%20desserts%20including%20tiramisu%2C%20panna%20cotta%2C%20and%20cannoli%20arranged%20beautifully%20on%20a%20serving%20platter%2C%20high%20quality%20photography&width=600&height=600&seq=24&orientation=squarish" alt="Postres italianos" class="w-full h-64 object-cover object-top transition-transform duration-300">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="py-16 md:py-24 bg-[#F5F5F5]">
+        <div class="container mx-auto px-4">
+            <h2 class="font-great-vibes text-4xl md:text-5xl text-center text-primary mb-12">Contáctanos</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-2xl font-semibold mb-6">Información de Contacto</h3>
+                        
+                        <div class="mb-6">
+                            <h4 class="text-lg font-medium mb-2">Dirección</h4>
+                            <p class="flex items-start">
+                                <span class="w-6 h-6 flex items-center justify-center mr-2 text-primary"><i class="ri-map-pin-line"></i></span>
+                                <span>C. Torre de los Caballos, 1, 30877 Bolnuevo, Murcia</span>
+                            </p>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="text-lg font-medium mb-2">Teléfono</h4>
+                            <p class="flex items-center">
+                                <span class="w-6 h-6 flex items-center justify-center mr-2 text-primary"><i class="ri-phone-line"></i></span>
+                                <a href="tel:+34641826049" class="hover:text-primary transition-colors">641 82 60 49</a>
+                            </p>
+                            <div class="mt-3">
+                                <a href="https://wa.me/34641826049" class="inline-flex items-center bg-[#25D366] text-white px-4 py-2 rounded-md hover:bg-[#128C7E] transition-colors whitespace-nowrap !rounded-button">
+                                    <span class="w-5 h-5 flex items-center justify-center mr-2"><i class="ri-whatsapp-fill"></i></span>
+                                    Contactar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-medium mb-2">Horario</h4>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="text-gray-600">Lunes - Jueves:</div>
+                                <div>13:00 - 16:00, 19:30 - 23:30</div>
+                                <div class="text-gray-600">Viernes - Sábado:</div>
+                                <div>13:00 - 16:00, 19:30 - 00:30</div>
+                                <div class="text-gray-600">Domingo:</div>
+                                <div>13:00 - 16:00, 19:30 - 23:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="h-96 md:h-auto rounded-lg overflow-hidden shadow-md">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3156.5725463367987!2d-1.3708646843752334!3d37.5602126798027!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd647d5c5d6c2c7f%3A0x3f7c0c7a3d3f8c0a!2sC.%20Torre%20de%20los%20Caballos%2C%201%2C%2030877%20Bolnuevo%2C%20Murcia!5e0!3m2!1ses!2ses!4v1651234567890!5m2!1ses!2ses" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#212121] text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <a href="#" class="font-['Pacifico'] text-white text-2xl md:text-3xl">Pizzeria Napoli</a>
+                    <p class="mt-4 text-gray-300">"La verdadera pizza napolitana, como en Italia, pero en el corazón de Bolnuevo."</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#inicio" class="text-gray-300 hover:text-white transition-colors">Inicio</a></li>
+                        <li><a href="#nosotros" class="text-gray-300 hover:text-white transition-colors">Nosotros</a></li>
+                        <li><a href="#menu" class="text-gray-300 hover:text-white transition-colors">Menú</a></li>
+                        <li><a href="#galeria" class="text-gray-300 hover:text-white transition-colors">Galería</a></li>
+                        <li><a href="#contacto" class="text-gray-300 hover:text-white transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Síguenos</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="ri-tripadvisor-line"></i>
+                        </a>
+                    </div>
+                    <div class="mt-6">
+                        <p class="text-sm text-gray-400">Formas de pago aceptadas:</p>
+                        <div class="flex space-x-3 mt-2">
+                            <div class="w-8 h-8 flex items-center justify-center text-gray-300">
+                                <i class="ri-visa-line ri-lg"></i>
+                            </div>
+                            <div class="w-8 h-8 flex items-center justify-center text-gray-300">
+                                <i class="ri-mastercard-line ri-lg"></i>
+                            </div>
+                            <div class="w-8 h-8 flex items-center justify-center text-gray-300">
+                                <i class="ri-paypal-line ri-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Pizzeria Napoli. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    menuToggle.innerHTML = '<i class="ri-menu-line ri-xl"></i>';
+                } else {
+                    menuToggle.innerHTML = '<i class="ri-close-line ri-xl"></i>';
+                }
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Language Dropdown Toggle
+            const langToggle = document.getElementById('language-toggle');
+            const langDropdown = document.getElementById('language-dropdown');
+            
+            langToggle.addEventListener('click', function() {
+                langDropdown.classList.toggle('hidden');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!langToggle.contains(event.target) && !langDropdown.contains(event.target)) {
+                    langDropdown.classList.add('hidden');
+                }
+            });
+            
+            // Language Selection
+            const langOptions = document.querySelectorAll('.lang-option');
+            const mobileLangOptions = document.querySelectorAll('.mobile-lang-option');
+            const currentLang = document.getElementById('current-lang');
+            
+            // Check localStorage for saved language
+            const savedLang = localStorage.getItem('language') || 'es';
+            currentLang.textContent = savedLang.toUpperCase();
+            
+            // Update active state for mobile language buttons
+            mobileLangOptions.forEach(option => {
+                if (option.dataset.lang === savedLang) {
+                    option.classList.add('bg-primary', 'text-white');
+                    option.classList.remove('bg-gray-200', 'text-gray-700');
+                } else {
+                    option.classList.remove('bg-primary', 'text-white');
+                    option.classList.add('bg-gray-200', 'text-gray-700');
+                }
+            });
+            
+            // Desktop language selection
+            langOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+                    localStorage.setItem('language', lang);
+                    currentLang.textContent = lang.toUpperCase();
+                    langDropdown.classList.add('hidden');
+                    
+                    // Update mobile buttons
+                    mobileLangOptions.forEach(mOption => {
+                        if (mOption.dataset.lang === lang) {
+                            mOption.classList.add('bg-primary', 'text-white');
+                            mOption.classList.remove('bg-gray-200', 'text-gray-700');
+                        } else {
+                            mOption.classList.remove('bg-primary', 'text-white');
+                            mOption.classList.add('bg-gray-200', 'text-gray-700');
+                        }
+                    });
+                    
+                    // Here you would add code to change the page language
+                    // For a real implementation
+                });
+            });
+            
+            // Mobile language selection
+            mobileLangOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+                    localStorage.setItem('language', lang);
+                    currentLang.textContent = lang.toUpperCase();
+                    
+                    mobileLangOptions.forEach(mOption => {
+                        if (mOption.dataset.lang === lang) {
+                            mOption.classList.add('bg-primary', 'text-white');
+                            mOption.classList.remove('bg-gray-200', 'text-gray-700');
+                        } else {
+                            mOption.classList.remove('bg-primary', 'text-white');
+                            mOption.classList.add('bg-gray-200', 'text-gray-700');
+                        }
+                    });
+                    
+                    // Here you would add code to change the page language
+                    // For a real implementation
+                });
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menu Tabs
+            const menuTabs = document.querySelectorAll('.menu-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            menuTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const target = this.dataset.tab;
+                    
+                    // Update active tab
+                    menuTabs.forEach(t => {
+                        t.classList.remove('bg-primary', 'text-white');
+                        t.classList.add('bg-white', 'border', 'border-gray-200');
+                    });
+                    this.classList.add('bg-primary', 'text-white');
+                    this.classList.remove('bg-white', 'border', 'border-gray-200');
+                    
+                    // Show target content
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
